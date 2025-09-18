@@ -39,7 +39,15 @@ public class GameManager : MonoBehaviour
     {
         globalTime += timeScene;
     }
+    ///public void TotalApple(int apples)
+   // {
+     //   if(apples == 3)
+       // {
+          //  Debug.Log("Has recogido todas las manzanas");
+        //}
 
+    
+   
     public float GlobalTime { get => globalTime; set => globalTime = value; }
 
 }
