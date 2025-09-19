@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class LoadScene : MonoBehaviour
+public class LoaderScenes : MonoBehaviour
 {
     
     void Start()
@@ -13,7 +13,7 @@ public class LoadScene : MonoBehaviour
     {
         
     }
-    public void LoadSceneByName(string nameScene)
+    public void LoaderScenesM(string nameScene)
     {
         SceneManager.LoadScene(nameScene);
     }

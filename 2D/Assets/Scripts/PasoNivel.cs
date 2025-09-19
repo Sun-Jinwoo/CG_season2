@@ -6,7 +6,7 @@ public class PasoNivel : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }
