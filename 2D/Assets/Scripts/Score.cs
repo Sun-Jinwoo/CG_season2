@@ -22,4 +22,5 @@ public class Score : MonoBehaviour
     {
         _Score += scoreEntrada;
     }
+
 }

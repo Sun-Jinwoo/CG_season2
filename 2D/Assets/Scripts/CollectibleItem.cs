@@ -36,7 +36,7 @@ public class CollectibleItem : MonoBehaviour
                 break;
 
         }
-
+        Destroy(gameObject);
 
     }
 }
