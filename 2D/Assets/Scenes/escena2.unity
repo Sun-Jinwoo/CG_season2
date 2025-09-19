@@ -164,6 +164,53 @@ Transform:
   - {fileID: 947077375}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &221850657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221850659}
+  - component: {fileID: 221850658}
+  m_Layer: 0
+  m_Name: controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &221850658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221850657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ee5888b6a9b68488fe4246541d4692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiempoEscena: {fileID: 797794660}
+  textApple: {fileID: 598237669}
+  textBanana: {fileID: 598237669}
+--- !u!4 &221850659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221850657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 566, y: 261.5354, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &277628973
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188032c288218ab42bcd135904ba687d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applePrefab: {fileID: 5634856076296171459, guid: 4465ccbac624d5a40895a1b8462ac4fb, type: 3}
+  applePrefab: {fileID: 2958293417289355360, guid: a1dd61f6b54ae854cb1c69ae5b34b8e9, type: 3}
   bananaPrefab: {fileID: 8402833345186002551, guid: 18f598e0e383d69409ede2b66c961d75, type: 3}
   minX: -10
   maxX: 10
@@ -398,6 +445,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &598237669 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7394928273748538087, guid: dc9d8998b895d3d4f8380e265c0a83e6, type: 3}
+  m_PrefabInstance: {fileID: 797794659}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &683948250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2208,6 +2266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiempoEscena: {fileID: 797794660}
+  textApple: {fileID: 0}
+  textBanana: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2220,3 +2280,4 @@ SceneRoots:
   - {fileID: 1414322572}
   - {fileID: 402823910}
   - {fileID: 570106811}
+  - {fileID: 221850659}
