@@ -373,8 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188032c288218ab42bcd135904ba687d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applePrefab: {fileID: 8402833345186002551, guid: 18f598e0e383d69409ede2b66c961d75, type: 3}
-  bananaPrefab: {fileID: 2958293417289355360, guid: a1dd61f6b54ae854cb1c69ae5b34b8e9, type: 3}
+  applePrefab: {fileID: 5634856076296171459, guid: 4465ccbac624d5a40895a1b8462ac4fb, type: 3}
+  bananaPrefab: {fileID: 8402833345186002551, guid: 18f598e0e383d69409ede2b66c961d75, type: 3}
   minX: -10
   maxX: 10
   spawnY: 10

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3248506336285445591}
   - component: {fileID: 2704123844424129965}
   - component: {fileID: 3610267843176715288}
+  - component: {fileID: 5091102865869799424}
   m_Layer: 0
   m_Name: Bananas_0 (1)
   m_TagString: Untagged
@@ -162,3 +163,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.14854407, y: 0.15540242}
   m_EdgeRadius: 0
+--- !u!114 &5091102865869799424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578888818000022941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b56d24715b08004e886adc692c517e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  itemValue: 5
