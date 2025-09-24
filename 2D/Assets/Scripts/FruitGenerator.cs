@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class FruitGenerator : MonoBehaviour
 {
@@ -7,73 +8,131 @@ public class FruitGenerator : MonoBehaviour
     [SerializeField] private GameObject applePrefab;
     [SerializeField] private GameObject bananaPrefab;
 
-    // Límites de generación (ajusta según tu escena)
-    [SerializeField] private float minX = -10f;
-    [SerializeField] private float maxX = 10f;
-    [SerializeField] private float spawnY = 10f; // Altura inicial desde donde se lanza el raycast
+    // Nombre de la escena donde generar frutas
+    [SerializeField] private string targetSceneName = "Scene2"; // Configura en el Inspector
 
-    // Capa del suelo
-    [SerializeField] private LayerMask groundLayer;
+    // Lista de puntos de spawn
+    [SerializeField] private Transform[] spawnPoints; // Asigna GameObjects vacíos en el Inspector
 
-    // Número máximo de frutas
+    // Número de frutas a generar
     [SerializeField] private int maxApples = 5;
     [SerializeField] private int maxBananas = 7;
 
     void Start()
     {
-        // Verificar si estamos en la Escena 2
-        if (SceneManager.GetActiveScene().buildIndex == 2)
+        // Debug: Imprimir escena actual
+        Scene currentScene = SceneManager.GetActiveScene();
+        Debug.Log($"Escena actual: {currentScene.name} (BuildIndex: {currentScene.buildIndex})");
+
+        // Verificar prefabs
+        if (applePrefab == null || bananaPrefab == null)
         {
+            Debug.LogError("applePrefab o bananaPrefab NO están asignados en el Inspector. Arrástralos desde Assets.");
+            return;
+        }
+        Debug.Log("Prefabs asignados correctamente.");
+
+        // Verificar componentes en prefabs
+        if (!applePrefab.GetComponent<EfectoSonido>() || !bananaPrefab.GetComponent<EfectoSonido>())
+        {
+            Debug.LogWarning("Uno de los prefabs (applePrefab o bananaPrefab) no tiene el componente EfectoSonido.");
+        }
+        if (!applePrefab.GetComponent<CollectibleItem>() || !bananaPrefab.GetComponent<CollectibleItem>())
+        {
+            Debug.LogWarning("Uno de los prefabs (applePrefab o bananaPrefab) no tiene el componente CollectibleItem.");
+        }
+
+        // Verificar puntos de spawn
+        if (spawnPoints == null || spawnPoints.Length < (maxApples + maxBananas))
+        {
+            Debug.LogError($"La lista de spawnPoints tiene {spawnPoints?.Length ?? 0} puntos, pero se necesitan al menos {maxApples + maxBananas} para {maxApples} manzanas y {maxBananas} bananas.");
+            return;
+        }
+
+        // Verificar si estamos en la escena correcta
+        if (currentScene.name == targetSceneName)
+        {
+            Debug.Log($"Generando frutas en {targetSceneName}...");
             GenerateFruits();
+        }
+        else
+        {
+            Debug.LogWarning($"No es la escena correcta (nombre: {currentScene.name}). Configura 'Target Scene Name' a '{currentScene.name}'.");
         }
     }
 
     void GenerateFruits()
     {
-        // Generar un número aleatorio de manzanas (1 a maxApples)
-        int appleCount = Random.Range(1, maxApples + 1);
-        for (int i = 0; i < appleCount; i++)
+        // Crear una lista de índices de spawnPoints disponibles
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            SpawnFruit(applePrefab);
+            if (spawnPoints[i] != null)
+                availableIndices.Add(i);
+            else
+                Debug.LogWarning($"spawnPoints[{i}] es null. Asegúrate de asignar todos los puntos en el Inspector.");
         }
 
-        // Generar un número aleatorio de bananas (1 a maxBananas)
-        int bananaCount = Random.Range(1, maxBananas + 1);
-        for (int i = 0; i < bananaCount; i++)
+        if (availableIndices.Count < (maxApples + maxBananas))
         {
-            SpawnFruit(bananaPrefab);
+            Debug.LogError($"No hay suficientes puntos de spawn válidos ({availableIndices.Count}) para {maxApples} manzanas y {maxBananas} bananas.");
+            return;
+        }
+
+        // Generar manzanas
+        Debug.Log($"Generando {maxApples} manzanas.");
+        for (int i = 0; i < maxApples; i++)
+        {
+            if (availableIndices.Count == 0)
+            {
+                Debug.LogWarning("No hay más puntos de spawn disponibles para manzanas.");
+                break;
+            }
+
+            int randomIndex = availableIndices[Random.Range(0, availableIndices.Count)];
+            Vector2 spawnPosition = spawnPoints[randomIndex].position;
+            GameObject fruit = Instantiate(applePrefab, spawnPosition, Quaternion.identity);
+            Debug.Log($"Manzana generada en: {spawnPosition}");
+
+            CollectibleItem collectible = fruit.GetComponent<CollectibleItem>();
+            if (collectible != null)
+                collectible.type = CollectibleItem.ItemType.Apple;
+
+            availableIndices.Remove(randomIndex); // Evitar reutilizar la posición
+        }
+
+        // Generar bananas
+        Debug.Log($"Generando {maxBananas} bananas.");
+        for (int i = 0; i < maxBananas; i++)
+        {
+            if (availableIndices.Count == 0)
+            {
+                Debug.LogWarning("No hay más puntos de spawn disponibles para bananas.");
+                break;
+            }
+
+            int randomIndex = availableIndices[Random.Range(0, availableIndices.Count)];
+            Vector2 spawnPosition = spawnPoints[randomIndex].position;
+            GameObject fruit = Instantiate(bananaPrefab, spawnPosition, Quaternion.identity);
+            Debug.Log($"Banana generada en: {spawnPosition}");
+
+            CollectibleItem collectible = fruit.GetComponent<CollectibleItem>();
+            if (collectible != null)
+                collectible.type = CollectibleItem.ItemType.Banana;
+
+            availableIndices.Remove(randomIndex); // Evitar reutilizar la posición
         }
     }
 
-    void SpawnFruit(GameObject fruitPrefab)
-    {
-        // Generar una posición X aleatoria dentro de los límites
-        float randomX = Random.Range(minX, maxX);
-        Vector2 raycastOrigin = new Vector2(randomX, spawnY);
-
-        // Lanzar un raycast hacia abajo para encontrar el suelo
-        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, Mathf.Infinity, groundLayer);
-
-        if (hit.collider != null)
-        {
-            // Colocar la fruta justo encima del suelo
-            Vector2 spawnPosition = hit.point + Vector2.up * 0.1f; // Pequeño offset para evitar colisión con el suelo
-            Instantiate(fruitPrefab, spawnPosition, Quaternion.identity);
-        }
-        else
-        {
-            // Si no se encuentra el suelo, intentar de nuevo (evitar bucles infinitos)
-            Debug.LogWarning("No se encontró el suelo para generar una fruta en X: " + randomX);
-            SpawnFruit(fruitPrefab); // Reintentar
-        }
-    }
-
-    // Visualizar los límites en el editor
     void OnDrawGizmos()
     {
+        if (spawnPoints == null) return;
+
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(new Vector2(minX, spawnY), new Vector2(maxX, spawnY));
-        Gizmos.DrawLine(new Vector2(minX, spawnY), new Vector2(minX, spawnY - 10f));
-        Gizmos.DrawLine(new Vector2(maxX, spawnY), new Vector2(maxX, spawnY - 10f));
+        foreach (Transform point in spawnPoints)
+        {
+            if (point != null)
+                Gizmos.DrawWireSphere(point.position, 0.5f);
+        }
     }
 }

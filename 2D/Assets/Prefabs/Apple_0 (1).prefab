@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 592432427839361269}
   - component: {fileID: 1970098747801106694}
   - component: {fileID: 5630668055166605770}
+  - component: {fileID: 2081373258047207765}
+  - component: {fileID: 1232192925454944902}
   m_Layer: 0
   m_Name: Apple_0 (1)
   m_TagString: Untagged
@@ -177,3 +179,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   itemValue: 3
+--- !u!114 &2081373258047207765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958293417289355360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a1ef41cdcde264aa54205b2e53f945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colectar1: {fileID: 8300000, guid: 027934eea903b2c458e7a7ee95458f19, type: 3}
+--- !u!114 &1232192925454944902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958293417289355360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a1ef41cdcde264aa54205b2e53f945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colectar1: {fileID: 8300000, guid: 027934eea903b2c458e7a7ee95458f19, type: 3}

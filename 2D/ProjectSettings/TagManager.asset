@@ -6,6 +6,7 @@ TagManager:
   tags:
   - objeto
   - Objeto
+  - Goal
   layers:
   - Default
   - TransparentFX
